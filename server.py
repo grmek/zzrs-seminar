@@ -10,8 +10,8 @@ PORT = 8080
 CMD = {
     "/c/algorithm1": "algorithms/algorithm1.o 10000",
     "/c/algorithm2": "algorithms/algorithm2.o 10000",
-    "/python/algorithm1": "python algorithms/algorithm1.py 10000",
-    "/python/algorithm2": "python algorithms/algorithm2.py 10000"
+    "/python/algorithm1": "python3 algorithms/algorithm1.py 10000",
+    "/python/algorithm2": "python3 algorithms/algorithm2.py 10000"
 }
 
 
@@ -39,7 +39,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header("Content-type", "text/html")
             self.end_headers()
-            result = "<!DOCTYPE html>\n<html>\n<body>\n<h1>404 Not Found</h1>\n</body>\n</html>"
+            result = "<!DOCTYPE html>\n<html>\n<body>\n<h1>404 Not Found</h1>\n</body>\n</html>\n"
             self.wfile.write(bytes(result, "utf-8"))
 
 
