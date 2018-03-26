@@ -7,7 +7,7 @@ def main(argv):
         pi = pi + sign*1/i
         sign = sign * -1
     pi = pi*4
-    print(pi)
+    print(pi, end="")
 
 if __name__ == "__main__":
    main(sys.argv[1:])
