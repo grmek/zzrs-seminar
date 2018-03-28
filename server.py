@@ -5,13 +5,13 @@ import time
 import json
 
 
-HOSTNAME = "0.0.0.0"
+HOST = ""
 PORT = 8080
 CMD = {
-    "/c/algorithm1": "algorithms/algorithm1.o 10000",
-    "/c/algorithm2": "algorithms/algorithm2.o 10000",
-    "/python/algorithm1": "python3 algorithms/algorithm1.py 10000",
-    "/python/algorithm2": "python3 algorithms/algorithm2.py 10000"
+    "/c/algorithm1": "algorithms/algorithm1.o 20000000",
+    "/c/algorithm2": "algorithms/algorithm2.o 8300",
+    "/python/algorithm1": "python3 algorithms/algorithm1.py 20000000",
+    "/python/algorithm2": "python3 algorithms/algorithm2.py 8300"
 }
 
 
@@ -43,7 +43,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(bytes(result, "utf-8"))
 
 
-httpd = socketserver.TCPServer((HOSTNAME, PORT), Handler)
+httpd = socketserver.TCPServer((HOST, PORT), Handler)
 print('Serving started.')
 httpd.serve_forever()
 
