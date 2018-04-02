@@ -6,7 +6,7 @@ import time
 
 def send_request_and_save_result(idx):
     t0 = time.time()
-    response = requests.get("http://localhost:8080/c/algorithm1").json()
+    response = requests.get(url).json()
     t = time.time() - t0
     write_lock.acquire()
     with open(file_name, "a") as f:
