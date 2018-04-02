@@ -24,9 +24,10 @@ with open(file_name, "w") as f:
 
 write_lock = threading.Lock()
 
+t = time.time()
 for i in range(num_requests):
-    t0 = time.time()
     threading.Thread(target=send_request_and_save_result, args=(i,)).start()
-    while (time.time() - t0) < interval:
+    while (time.time() - t) < interval:
         pass
+    t += interval
 
