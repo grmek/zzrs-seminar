@@ -10,7 +10,7 @@ def send_request_and_save_result(idx):
     t = time.time() - t0
     write_lock.acquire()
     with open(file_name, "a") as f:
-        f.write("%d\t%f\t%f\t%f\t%f\n" % (idx, t0, response["pi"], response["t"], t))
+        f.write("%d\t%.9f\t%.9f\t%.9f\t%.9f\n" % (idx, t0, response["pi"], response["t"], t))
     write_lock.release()
 
 
@@ -27,7 +27,7 @@ write_lock = threading.Lock()
 t = time.time()
 for i in range(num_requests):
     threading.Thread(target=send_request_and_save_result, args=(i,)).start()
-    while (time.time() - t) < interval:
-        pass
     t += interval
+    while time.time() < t:
+        pass
 
