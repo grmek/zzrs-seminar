@@ -8,10 +8,10 @@ import json
 HOST = ""
 PORT = 8080
 CMD = {
-    "/c/algorithm1": "algorithms/algorithm1.o 20000000",
-    "/c/algorithm2": "algorithms/algorithm2.o 8300",
-    "/python/algorithm1": "python3 algorithms/algorithm1.py 20000000",
-    "/python/algorithm2": "python3 algorithms/algorithm2.py 8300"
+    "/c/algorithm1": "algorithms/algorithm1.o 24473399",
+    "/c/algorithm2": "algorithms/algorithm2.o 2",
+    "/python/algorithm1": "python3 algorithms/algorithm1.py 24473399",
+    "/python/algorithm2": "python3 algorithms/algorithm2.py 2"
 }
 
 
