@@ -15,8 +15,13 @@ CMD = {
 }
 
 
+class ThreadingTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
+    pass
+
+
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
+        t0 = time.time()
         if self.path == "/":
             self.send_response(200)
             self.send_header("Content-type", "text/html")
@@ -30,7 +35,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            t0 = time.time()
             pi = float(subprocess.check_output(CMD[self.path], shell=True).decode("utf-8"))
             t = time.time() - t0
             result = {"pi": pi, "t": t}
@@ -43,7 +47,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(bytes(result, "utf-8"))
 
 
-httpd = socketserver.TCPServer((HOST, PORT), Handler)
+httpd = ThreadingTCPServer((HOST, PORT), Handler)
 print('Serving started.')
 httpd.serve_forever()
 
