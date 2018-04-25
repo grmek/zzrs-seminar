@@ -2,11 +2,12 @@ import sys
 import threading
 import requests
 import time
+import random
 
 
 def send_request_and_save_result(idx):
-    print(idx)
     try:
+        print(idx)
         t0 = time.time()
         response = requests.get(url).json()
         t = time.time() - t0 - response["t"]
@@ -34,7 +35,7 @@ write_lock = threading.Lock()
 t = time.time()
 for i in range(num_requests):
     threading.Thread(target=send_request_and_save_result, args=(i,)).start()
-    t += interval
+    t += random.expovariate(1 / interval)
     while time.time() < t:
         pass
 
