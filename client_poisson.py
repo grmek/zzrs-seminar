@@ -6,20 +6,18 @@ import random
 
 
 def send_request_and_save_result(idx):
+    print("Sending request " + str(idx) + " ...")
     try:
-        print(idx)
         t0 = time.time()
         response = requests.get(url).json()
         t = time.time() - t0 - response["t"]
-        write_lock.acquire()
-        with open(file_name, "a") as f:
-            f.write("%d\t%.9f\t%.9f\t%.9f\t%.9f\n" % (idx, t0, response["pi"], response["t"], t))
-        write_lock.release()
     except:
-        try:
-            write_lock.release()
-        except:
-            pass
+        print("ERROR: No response from server (request " + str(idx) + ").")
+        return
+    write_lock.acquire()
+    with open(file_name, "a") as f:
+        f.write("%d\t%.9f\t%.9f\t%.9f\t%.9f\n" % (idx, t0, response["pi"], response["t"], t))
+    write_lock.release()
 
 
 url = sys.argv[1]
