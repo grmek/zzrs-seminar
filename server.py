@@ -35,10 +35,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            pi = float(subprocess.check_output(CMD[self.path], shell=True).decode("utf-8"))
-            t = time.time() - t0
-            result = {"pi": pi, "t": t}
-            self.wfile.write(bytes(json.dumps(result), "utf-8"))
+            try:
+                pi = float(subprocess.check_output(CMD[self.path], shell=True).decode("utf-8"))
+                t = time.time() - t0
+                result = {"pi": pi, "t": t}
+                self.wfile.write(bytes(json.dumps(result), "utf-8"))
+            except:
+                self.wfile.write(bytes(0))
         else:
             self.send_response(404)
             self.send_header("Content-type", "text/html")
